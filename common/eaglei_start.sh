@@ -57,15 +57,17 @@ fi
 # then copy the files, and then stop/run tomcat.
 cd $EAGLE_I_HOME
 
-if [ -d assets/images && "$(ls -A assets/images)" ]; then
-  if [ ! -d $CATALINA_HOME/webapps/ROOT ]; then
-    catalina.sh start
-    sleep 10
-    catalina.sh stop
-  fi
-  if [ ! -f $CATALINA_HOME/webapps/ROOT/repository/assets.installed ]; then
-    cp -a $EAGLE_I_HOME/assets/* $CATALINA_HOME/webapps/ROOT/repository/
-    touch $CATALINA_HOME/webapps/ROOT/repository/assets.installed
+if [ -d assets ]; then
+  if [ "$(ls -A assets)" ]; then
+    if [ ! -d $CATALINA_HOME/webapps/ROOT ]; then
+      catalina.sh start
+      sleep 10
+      catalina.sh stop
+    fi
+    if [ ! -f $CATALINA_HOME/webapps/ROOT/repository/assets.installed ]; then
+      cp -a assets/* $CATALINA_HOME/webapps/ROOT/repository/
+      touch $CATALINA_HOME/webapps/ROOT/repository/assets.installed
+    fi
   fi
 fi
 
