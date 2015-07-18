@@ -8,7 +8,8 @@ the [eagle-i network](http://www.eagle-i.net).
 # Supported tags and respective `Dockerfile` links
 
 - `4.0.0`, `latest` - Master branch, current stable release
-- `3.7.1` - Previous build (not yet built)
+- `3.7.2` - Previous eagle-i build
+- `3.5.0` - Earlier eagle-i build
 
 * [eagle-i Dockerfile Github](https://github.com/freelock/eaglei-docker)
 * [eagle-i Docker Hub](https://registry.hub.docker.com/u/freelock/eaglei/)
