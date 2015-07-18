@@ -66,7 +66,10 @@ RUN sed -i "s+common.loader=\\$.catalina+common.loader=$EAGLE_I_HOME/conf,\\$\\{
   $CATALINA_HOME/conf/catalina.properties && \
   echo "org.eaglei.home=$EAGLE_I_HOME" >> $CATALINA_HOME/conf/catalina.properties
 
-VOLUME /opt/eaglei/repo
+# Create an assets directory:
+RUN mkdir assets
+
+VOLUME /opt/eaglei
 
 EXPOSE 8009 8443
 
