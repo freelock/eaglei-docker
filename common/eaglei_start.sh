@@ -21,7 +21,6 @@ EOT
   bash etc/finish-install.sh $ADMIN_USERNAME "$ADMIN_PASSWORD" https://localhost:8443
   bash etc/upgrade.sh $ADMIN_USERNAME "$ADMIN_PASSWORD" https://localhost:8443
   catalina.sh stop
-  touch $REPO_HOME/docker.installed
 fi
 
 # Now install/configure sparqler
@@ -51,4 +50,23 @@ EOT
   catalina.sh stop
 fi
 
+# If this is the first run of a container against an existing repo,
+# we need to copy over any assets -- primarily anything in assets/images.
+# Unfortunately this needs to happen after the WAR files have been extracted.
+# So if they have not yet been extracted, we need to start up tomcat first,
+# then copy the files, and then stop/run tomcat.
+if [ -d assets/images && "$(ls -A assets/images)" ]; then
+  if [ ! -d $CATALINA_HOME/webapps/ROOT ]; then
+    catalina.sh start
+    sleep 10
+    catalina.sh stop
+  fi
+  if [ ! -f $CATALINA_HOME/webapps/ROOT/repository/assets.installed ]; then
+    cp -a $REPO_HOME/assets/* $CATALINA_HOME/webapps/ROOT/repository/
+    touch $CATALINA_HOME/webapps/ROOT/repository/assets.installed
+  fi
+fi
+
+
+# Run tomcat in this shell
 catalina.sh run

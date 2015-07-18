@@ -10,6 +10,8 @@ the [eagle-i network](http://www.eagle-i.net).
 - `4.0.0`, `latest` - Master branch, current stable release
 - `3.7.1` - Previous build (not yet built)
 
+* [eagle-i Dockerfile Github](https://github.com/freelock/eaglei-docker)
+* [eagle-i Docker Hub](https://registry.hub.docker.com/u/freelock/eaglei/)
 
 # How is this image designed to be used?
 
@@ -114,9 +116,9 @@ Main URL for your eagle-i node, added to configuration.properties.
 
 Main title displayed on the website.
 
-###  REPO_LOGO=/repository/assets/images/logo.png
+###  REPO_LOGO=/repository/images/logo.png
 
-Main logo used on the website. Note that repository/local gets symlinked to /opt/eaglei/assets, so you can place your logo in /opt/eaglei/assets/images/logo.png to have this loaded.
+Main logo used on the website. Note that on container startup, files are copied from assets into the repository. So you can place your logo in /opt/eaglei/assets/images/logo.png to have this loaded.
 
 ###  REPO_CSS=/repository/styles/i.css
 
