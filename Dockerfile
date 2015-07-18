@@ -3,7 +3,7 @@ FROM tomcat:7
 MAINTAINER Freelock john@freelock.com
 
 WORKDIR /opt/eaglei
-ENV EAGLE_I_VERSION=4.0.0 REPO_HOME=/opt/eaglei/repo
+ENV EAGLE_I_VERSION=3.7.2 REPO_HOME=/opt/eaglei/repo
 RUN DEBIAN_FRONTEND=noninteractive && \
   apt-get update && \
   apt-get install -y libapr1 libtcnative-1
