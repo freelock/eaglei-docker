@@ -55,6 +55,8 @@ fi
 # Unfortunately this needs to happen after the WAR files have been extracted.
 # So if they have not yet been extracted, we need to start up tomcat first,
 # then copy the files, and then stop/run tomcat.
+cd $EAGLE_I_HOME
+
 if [ -d assets/images && "$(ls -A assets/images)" ]; then
   if [ ! -d $CATALINA_HOME/webapps/ROOT ]; then
     catalina.sh start
@@ -62,7 +64,7 @@ if [ -d assets/images && "$(ls -A assets/images)" ]; then
     catalina.sh stop
   fi
   if [ ! -f $CATALINA_HOME/webapps/ROOT/repository/assets.installed ]; then
-    cp -a $REPO_HOME/assets/* $CATALINA_HOME/webapps/ROOT/repository/
+    cp -a $EAGLE_I_HOME/assets/* $CATALINA_HOME/webapps/ROOT/repository/
     touch $CATALINA_HOME/webapps/ROOT/repository/assets.installed
   fi
 fi
