@@ -41,11 +41,24 @@ The image is built with an EAGLE_I_HOME volume for data to be mounted at /opt/ea
 
 ## Start an eagle-i instance with an existing repository
 
+> Important note! Before starting this image with an existing eaglei repository, make a full backup! We recommend mounting a copy of your eagle_i_home!
+
+> This image updates the contents of $REPO_HOME with the new eagle-i zip file, and datamanagement tools, so that the repository may be quickly upgraded.
+
+
 1. Put an ssl certificate (or a symlink) in /etc/ssl/private/eagle-i.crt and a corresponding key in /etc/ssl/private/eagle-i.key
 2. Make a copy of your eagle-i home directory (e.g. cp -a /opt/eaglei /opt/eaglei_data) so you can go back to your previous config if necessary
 3. Stop existing servers that are providing web access for previous versions
 4.	docker run -p 80:8080 -p 443:8443 -v /etc/ssl:/etc/ssl -v /opt/eaglei_data:/opt/eaglei -d freelock/eaglei
 
+## Upgrade an eagle-i instance
+
+Start with an existing instance. After the new container is created, the new versions of scripts will be in $REPO_HOME/etc, along with the corresponding eagle-i-datatools-datamanagement.jar. The upgrade script is not yet run.
+
+1. Get a shell inside the container: docker exec -ti eaglei /bin/bash
+2. cd repo/etc
+3. bash upgrade.sh adminuser mypassword https://public.repo.url
+4. (if data migration is necessary) bash data-migration.sh -u adminuser -p mypassword -r https://public.repo.url
 
 ## Start a new eagle-i instance, with a clean install
 
