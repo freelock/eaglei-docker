@@ -21,6 +21,10 @@ EOT
   bash etc/finish-install.sh $ADMIN_USERNAME "$ADMIN_PASSWORD" https://localhost:8443
   bash etc/upgrade.sh $ADMIN_USERNAME "$ADMIN_PASSWORD" https://localhost:8443
   catalina.sh stop
+else
+  # In this case, we have an existing repository. Copy over
+  # new copies of the release...
+  cp -a ~/repository-$EAGLE_I_VERSION/ $REPO_HOME/
 fi
 
 # Now install/configure sparqler
@@ -63,6 +67,7 @@ if [ -d assets ]; then
       catalina.sh start
       sleep 10
       catalina.sh stop
+      sleep 30
     fi
     if [ ! -f $CATALINA_HOME/webapps/ROOT/repository/assets.installed ]; then
       cp -a assets/* $CATALINA_HOME/webapps/ROOT/repository/

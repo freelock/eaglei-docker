@@ -7,7 +7,8 @@ ENV EAGLE_I_VERSION=4.0.0 REPO_HOME=/opt/eaglei/repo
 RUN DEBIAN_FRONTEND=noninteractive && \
   apt-get update && \
   apt-get install -y libapr1 libtcnative-1
-RUN wget http://repo.eagle-i.net/nexus/content/repositories/releases/org/eagle-i/eagle-i-repository-dist/$EAGLE_I_VERSION/eagle-i-repository-dist-$EAGLE_I_VERSION-dist.zip && \
+RUN cd && \
+  wget http://repo.eagle-i.net/nexus/content/repositories/releases/org/eagle-i/eagle-i-repository-dist/$EAGLE_I_VERSION/eagle-i-repository-dist-$EAGLE_I_VERSION-dist.zip && \
   unzip eagle-i-repository-dist-$EAGLE_I_VERSION-dist.zip && \
   mv repository-$EAGLE_I_VERSION $REPO_HOME
 
@@ -26,6 +27,8 @@ RUN chmod +x /usr/local/bin/eaglei_start.sh && \
   mkdir -p $CATALINA_HOME/conf/Catalina/localhost && \
   unzip -p $CATALINA_HOME/webapps/ROOT.war META-INF/context.xml > $CATALINA_HOME/conf/Catalina/localhost/ROOT.xml
 
+# Upgrade instructions to update scripts in underlying repo_home
+#
 
 # Default environment variables for installation scripts
 # Pass these into the docker run command with -e to override
