@@ -11,7 +11,7 @@ RUN cd && \
   wget http://repo.eagle-i.net/nexus/content/repositories/releases/org/eagle-i/eagle-i-datatools-datamanagement/$EAGLE_I_VERSION/eagle-i-datatools-datamanagement-$EAGLE_I_VERSION.jar && \
   wget http://repo.eagle-i.net/nexus/content/repositories/releases/org/eagle-i/eagle-i-repository-dist/$EAGLE_I_VERSION/eagle-i-repository-dist-$EAGLE_I_VERSION-dist.zip && \
   unzip eagle-i-repository-dist-$EAGLE_I_VERSION-dist.zip && \
-  mv repository-$EAGLE_I_VERSION $REPO_HOME
+  cp -a repository-$EAGLE_I_VERSION $REPO_HOME
 
 ## That was a big download! Let's do our modifications below here to avoid that...
 RUN rm -Rf $CATALINA_HOME/webapps/ROOT* && \
