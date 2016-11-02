@@ -24,7 +24,7 @@ EOT
 else
   # In this case, we have an existing repository. Copy over
   # new copies of the release...
-  cp -a ~/repository-$EAGLE_I_VERSION/ $REPO_HOME/
+  cp -a ~/repository-$EAGLE_I_VERSION/* $REPO_HOME/
   cp ~/eagle-i-datatools-datamanagement-$EAGLE_I_VERSION.jar $REPO_HOME/etc/eagle-i-datatools-datamanagement.jar
 fi
 
